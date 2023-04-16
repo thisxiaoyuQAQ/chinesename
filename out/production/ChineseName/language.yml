@@ -1,0 +1,41 @@
+setSuccess: "&e&l你的中文名设置好了：%nick%"
+perm_lack_set: "&4&l你缺少cn.set的权限!"
+setSuccess_T: "&e&l你的临时中文名设置好了：%nick%"
+perm_lack_set_T: "&4&l你缺少cn.set.temporarily的权限!"
+wrong_set: "&b参数不对诶?? 你是不是要用/cn set 名称 [-t]??"
+
+setOtherSuccess: "&e&l%player% 的中文名设置好了：&r%nick%"
+perm_lack_setother: "&4&l你缺少cn.setother的权限!"
+setOtherSuccess_T: "&e&l%player% 的临时中文名设置好了：%nick%"
+perm_lack_setother_T: "&4&l你缺少cn.setother.temporarily的权限!"
+wrong_setother: "&b参数不对诶?? 你是不是要用/cn setother 名称 [-t]??"
+
+resetSuccess: "&e&l已经强制更改为 %player% 的原名"
+perm_lack_reset: "&4&l你缺少cn.reset的权限!"
+resetSuccess_T: "&e&l已经强制临时更改为 %player% 的原名"
+perm_lack_reset_T: "&4&l你缺少cn.reset.temporarily的权限!"
+wrong_reset: "&b参数不对诶?? 你是不是要用/cn reset ID [-t]??"
+
+check: "&4&l该玩家暂未拥有中文名"
+check_name: "&b玩家 %player% &b的中文名是: &r %nick%"
+check_name_T: "&b玩家 %player% &b的临时中文名是: &r %nick%"
+perm_lack_check: "&4&l你缺少cn.reset的权限!"
+wrong_check: "&b参数不对诶?? 你是不是要用/cn check id ??"
+
+givecard: "&b成功给予 %player% 改名卡*1"
+givecard_informer: "&b你被给予改名卡*1"
+perm_lack_givecard: "&4&l你缺少cn.givecard的权限"
+wrong_givecard: "&b参数不对诶?? 你是不是要用/cn givecard ID "
+
+usecard: "&e&l你的中文名设置好了：%nick%"
+perm_lack_usecard: "&4&l你缺少cn.usecard的权限"
+wrong_usecard: "&b参数不对诶?? 你是不是要用/cn usecard 名称 "
+
+tpSuccess: "&b成功传送到玩家 %player% (%nick%) 的位置"
+offline: "&4&l玩家不在线"
+perm_lack_tp: "&4&l你缺少cn.tp的权限"
+wrong_tp: "&b参数不对诶?? 你是不是要用/cn tp 名称"
+wrong_tpa: "&b参数不对诶?? 你是不是要用/cn tpa 名称"
+
+maxlength_warn: "&d&l中文名超过最大长度: %maxWords% 个字符"
+onlyPlayer: "&4&l该命令只能玩家使用"
