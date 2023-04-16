@@ -1,0 +1,13 @@
+name: ChineseName
+main: com.cryxiaoyu.chinesename.Main
+version: 2.4-beta-1
+author: "§c小雨 §b& §c白魂"
+description: "§b§l反馈群426996480"
+commands:
+  ChineseName:
+    aliases:
+      - cn
+    description: "使用/cn help 页码 查看帮助"
+permissions:
+  cn.usecard:
+    default: true
