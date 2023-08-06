@@ -8,6 +8,8 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.Configuration;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -24,11 +26,15 @@ public class NameChanger implements CommandExecutor {
         //设置文件
         File file = new File(Main.getInstance().getDataFolder(), "settings.yml");
         File language = new File(Main.getInstance().getDataFolder(), "language.yml");
-        YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+        YamlConfiguration settings = YamlConfiguration.loadConfiguration(file);
         YamlConfiguration lan = YamlConfiguration.loadConfiguration(language);
+        FileConfiguration config =  Main.getInstance().getConfig();
+        String id = config.getConfigurationSection("").getKeys(false);
+
+
         Plugin plugin = Main.getPlugin(Main.class);
 
-        String maxlength = lan.getString("maxlength_warn").replace("&", "§").replaceAll("%maxWords%", String.valueOf(config.getInt("maxlength")));
+        String maxlength = lan.getString("maxlength_warn").replace("&", "§").replaceAll("%maxWords%", String.valueOf(settings.getInt("maxlength")));
         String onlyPlayer = lan.getString("onlyPlayer").replace("&", "§");
 
         //设置中文名
@@ -40,9 +46,9 @@ public class NameChanger implements CommandExecutor {
                     String seted_string = strings[1].replace("&", "§");
                     if (!commandSender.hasPermission("cn.maxlength.bypass")) {
                         int length = seted_string.length();
-                        if (length <= config.getInt("maxlength")) {
+                        if (length <= settings.getInt("maxlength")) {
                             p.setDisplayName(seted_string + ChatColor.RESET);
-                            if (config.getBoolean("tablist")) {
+                            if (settings.getBoolean("tablist")) {
                                 p.setPlayerListName(seted_string + ChatColor.RESET);
                             }
                             //p.sendMessage("§e§l你的中文名设置好了： " + ChatColor.RESET + seted_string);
@@ -50,12 +56,12 @@ public class NameChanger implements CommandExecutor {
                             Main.getInstance().getConfig().set(p.getName(), seted_string.replace("&", "§"));
                             Main.getInstance().saveConfig();
                         } else {
-                            //commandSender.sendMessage("§d§l中文名超过最大长度:" + config.getInt("maxlength") + "个字符");
+                            //commandSender.sendMessage("§d§l中文名超过最大长度:" + settings.getInt("maxlength") + "个字符");
                             commandSender.sendMessage(maxlength);
                         }
                     } else {
                         p.setDisplayName(seted_string + ChatColor.RESET);
-                        if (config.getBoolean("tablist")) {
+                        if (settings.getBoolean("tablist")) {
                             p.setPlayerListName(seted_string + ChatColor.RESET);
                         }
                         //p.sendMessage("§e§l你的中文名设置好了： " + ChatColor.RESET + seted_string);
@@ -77,9 +83,9 @@ public class NameChanger implements CommandExecutor {
                     String seted_string = strings[1].replace("&", "§");
                     if (!commandSender.hasPermission("cn.maxlength.bypass")) {
                         int length = seted_string.length();
-                        if (length <= config.getInt("maxlength")) {
+                        if (length <= settings.getInt("maxlength")) {
                             p.setDisplayName(seted_string + ChatColor.RESET);
-                            if (config.getBoolean("tablist")) {
+                            if (settings.getBoolean("tablist")) {
                                 p.setPlayerListName(seted_string + ChatColor.RESET);
                             }
                             //p.sendMessage("§e§l你的§b§l临时中文名§e§l设置好了： " + ChatColor.RESET + seted_string);
@@ -89,7 +95,7 @@ public class NameChanger implements CommandExecutor {
                         }
                     } else {
                         p.setDisplayName(seted_string + ChatColor.RESET);
-                        if (config.getBoolean("tablist")) {
+                        if (settings.getBoolean("tablist")) {
                             p.setPlayerListName(seted_string + ChatColor.RESET);
                         }
                         p.sendMessage(lan.getString("setSuccess_T").replace("&", "§").replaceAll("%nick%", seted_string));
@@ -114,11 +120,11 @@ public class NameChanger implements CommandExecutor {
                 seted_string = seted_string.replace("&", "§");
                 if (!commandSender.hasPermission("cn.maxlength.bypass")) {
                     int length = seted_string.length();
-                    if (length <= config.getInt("maxlength")) {
+                    if (length <= settings.getInt("maxlength")) {
                         //commandSender.sendMessage("§e§l" + strings[1] + "§e§l的中文名设置好了： " + ChatColor.RESET + seted_string);
                         commandSender.sendMessage(lan.getString("setOtherSuccess").replace("&", "§").replaceAll("%player%", strings[1]).replaceAll("%nick%", seted_string));
                         seted.setDisplayName(seted_string + ChatColor.RESET);
-                        if (config.getBoolean("tablist")) {
+                        if (settings.getBoolean("tablist")) {
                             seted.setPlayerListName(seted_string + ChatColor.RESET);
                         }
                         Main.getInstance().getConfig().set(seted.getName(), seted_string.replace("&", "§"));
@@ -129,7 +135,7 @@ public class NameChanger implements CommandExecutor {
                 } else {
                     commandSender.sendMessage(lan.getString("setOtherSuccess").replace("&", "§").replaceAll("%player%", strings[1]).replaceAll("%nick%", seted_string));
                     seted.setDisplayName(seted_string + ChatColor.RESET);
-                    if (config.getBoolean("tablist")) {
+                    if (settings.getBoolean("tablist")) {
                         seted.setPlayerListName(seted_string + ChatColor.RESET);
                     }
                     Main.getInstance().getConfig().set(seted.getName(), seted_string.replace("&", "§"));
@@ -146,11 +152,11 @@ public class NameChanger implements CommandExecutor {
                 seted_string = seted_string.replace("&", "§");
                 if (!commandSender.hasPermission("cn.maxlength.bypass")) {
                     int length = seted_string.length();
-                    if (length <= config.getInt("maxlength")) {
+                    if (length <= settings.getInt("maxlength")) {
                         //commandSender.sendMessage("§e§l" + strings[1] + "§e§l的§b§l临时中文名§e§l设置好了： " + ChatColor.RESET + seted_string);
                         commandSender.sendMessage(lan.getString("setOtherSuccess_T").replace("&", "§").replaceAll("%player%", strings[1]).replaceAll("%nick%", seted_string));
                         seted.setDisplayName(seted_string + ChatColor.RESET);
-                        if (config.getBoolean("tablist")) {
+                        if (settings.getBoolean("tablist")) {
                             seted.setPlayerListName(seted_string + ChatColor.RESET);
                         }
                     } else {
@@ -159,7 +165,7 @@ public class NameChanger implements CommandExecutor {
                 } else {
                     commandSender.sendMessage(lan.getString("setOtherSuccess_T").replace("&", "§").replaceAll("%player%", strings[1]).replaceAll("%nick%", seted_string));
                     seted.setDisplayName(seted_string + ChatColor.RESET);
-                    if (config.getBoolean("tablist")) {
+                    if (settings.getBoolean("tablist")) {
                         seted.setPlayerListName(seted_string + ChatColor.RESET);
                     }
                 }
@@ -180,7 +186,7 @@ public class NameChanger implements CommandExecutor {
                 seted.setDisplayName(seted.getName());
                 //seted.sendMessage("§e§l已经强制更改为" + seted.getName() + "§e§l的原名");
                 commandSender.sendMessage(lan.getString("resetSuccess").replace("&", "§").replaceAll("%player%", seted.getName()));
-                if (config.getBoolean("tablist")) {
+                if (settings.getBoolean("tablist")) {
                     seted.setPlayerListName(seted.getName() + ChatColor.RESET);
                 }
                 Main.getInstance().getConfig().set(seted.getName(), seted.getName());
@@ -193,7 +199,7 @@ public class NameChanger implements CommandExecutor {
             if (commandSender.hasPermission("cn.reset.temporarily")) {
                 Player seted = Bukkit.getPlayer(strings[1]);
                 seted.setDisplayName(seted.getName());
-                if (config.getBoolean("tablist")) {
+                if (settings.getBoolean("tablist")) {
                     seted.setPlayerListName(seted.getName() + ChatColor.RESET);
                 }
                 //seted.sendMessage("§e§l已经临时强制更改为" + seted.getName() + "§e§l的原名");
@@ -241,9 +247,9 @@ public class NameChanger implements CommandExecutor {
         //改名卡改名卡改名卡改名卡改名卡改名卡改名卡改名卡改名卡改名卡改名卡改名卡改名卡改名卡改名卡改名卡
         ItemStack card = new ItemStack(Material.NAME_TAG);
         ItemMeta itemMeta = card.getItemMeta();
-        String displayName = config.getString("name");
-        itemMeta.setDisplayName(config.getString("name"));
-        List<String> lores = config.getStringList("lores");
+        String displayName = settings.getString("name");
+        itemMeta.setDisplayName(settings.getString("name"));
+        List<String> lores = settings.getStringList("lores");
         itemMeta.setLore((lores));
         card.setItemMeta(itemMeta);
 
@@ -289,9 +295,9 @@ public class NameChanger implements CommandExecutor {
                                         String seted_string = strings[1];
                                         if (!commandSender.hasPermission("cn.maxlength.bypass")) {
                                             int length = seted_string.length();
-                                            if (length <= config.getInt("maxlength")) {
+                                            if (length <= settings.getInt("maxlength")) {
                                                 p.setDisplayName(strings[1] + ChatColor.RESET);
-                                                if (config.getBoolean("tablist")) {
+                                                if (settings.getBoolean("tablist")) {
                                                     p.setPlayerListName(seted_string + ChatColor.RESET);
                                                 }
                                                 //p.sendMessage("§e§l你的中文名设置好了： " + ChatColor.RESET + strings[1]);
@@ -299,14 +305,14 @@ public class NameChanger implements CommandExecutor {
                                                 Main.getInstance().getConfig().set(p.getName(), strings[1]);
                                                 Main.getInstance().saveConfig();
                                             } else {
-                                                //commandSender.sendMessage("§d§l中文名超过最大长度:" + config.getInt("maxlength") + "个字符");
+                                                //commandSender.sendMessage("§d§l中文名超过最大长度:" + settings.getInt("maxlength") + "个字符");
                                                 commandSender.sendMessage(maxlength);
                                                 Inventory inventory = p.getInventory();
                                                 inventory.addItem(card);
                                             }
                                         } else {
                                             p.setDisplayName(seted_string + ChatColor.RESET);
-                                            if (config.getBoolean("tablist")) {
+                                            if (settings.getBoolean("tablist")) {
                                                 p.setPlayerListName(seted_string + ChatColor.RESET);
                                             }
                                             //p.sendMessage("§e§l你的中文名设置好了： " + ChatColor.RESET + seted_string);
