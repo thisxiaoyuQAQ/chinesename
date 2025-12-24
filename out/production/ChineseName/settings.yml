@@ -1,7 +1,11 @@
 tablist: true
 maxlength: 20
+material: "NAME_TAG"
 name: "§d§l改名卡"
 lores:
   - "§e食用方法:"
   - "§e/cn usecard 名称"
   - "§d114514"
+blacklist:
+  - "sb"
+  - "cnm"

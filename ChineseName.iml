@@ -36,5 +36,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="McMybatis" level="project" />
   </component>
 </module>

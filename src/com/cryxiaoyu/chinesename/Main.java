@@ -1,11 +1,13 @@
 package com.cryxiaoyu.chinesename;
 
 import com.cryxiaoyu.chinesename.command.NameChanger;
+import com.cryxiaoyu.chinesename.event.ChineseNameChangeEvent;
 import com.cryxiaoyu.chinesename.metrics.Metrics;
 import com.cryxiaoyu.chinesename.metrics.PlaceHolderApiHooker;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -18,6 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Main extends JavaPlugin implements Listener {
     public static ConcurrentHashMap<String , String> playerName = new ConcurrentHashMap<>();
+
     private static Main instance;
     public Main() {}
     public static Main getInstance() {return instance;}
@@ -54,7 +57,7 @@ public class Main extends JavaPlugin implements Listener {
         Bukkit.getConsoleSender().sendMessage("§b[ChineseName]中文名插件已加载");
         Bukkit.getConsoleSender().sendMessage("§b 作者:小雨        QQ:3066156386");
         Bukkit.getConsoleSender().sendMessage("§b   强烈建议添加反馈群:426996480");
-        Bukkit.getConsoleSender().sendMessage("§b爱发电 https://afdian.net/@ixiaoyu");
+        Bukkit.getConsoleSender().sendMessage("§b爱发电 https://afdian.com/a/ixiaoyu");
         Bukkit.getConsoleSender().sendMessage("§b================================");
     }
 
@@ -74,8 +77,18 @@ public class Main extends JavaPlugin implements Listener {
             }
         }
     }
-    @EventHandler
-    public void PlayerQuit(PlayerQuitEvent e) {
+    /*@EventHandler
+    public void onChineseNameChange(ChineseNameChangeEvent event) {
+        String oldName = event.getOldName();
+        String newName = event.getNewName();
+        UUID uuid = event.getUUID();
+        playerName.remove(oldName, uuid);
+        playerName.put(newName, String.valueOf(uuid));
 
-    }
+        // update display name
+        Player player = Bukkit.getPlayer(uuid);
+        if (player != null) {
+            player.setDisplayName(newName);
+        }
+    }*/
 }
